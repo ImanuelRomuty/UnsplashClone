@@ -1,4 +1,4 @@
-package com.example.composeunsplash
+package com.example.composeunsplash.template.detail
 
 
 import android.util.Log
@@ -13,19 +13,17 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.composeunsplash.data.local.Photo
 import org.koin.androidx.compose.getViewModel
 
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun DetailScreen(photoId : String?){
-    //terima data main screen
-    val context = LocalContext.current
     val viewModel = getViewModel<DetailViewModel>()
     photoId?.let { viewModel.searchPhoto(it) }
-    Log.d("cekCEKCEKCE",photoId.toString())
-
     val result = viewModel.detailPhoto().observeAsState()
     result.value?.let {
         val photo = Photo(
@@ -36,10 +34,9 @@ fun DetailScreen(photoId : String?){
             modifier = Modifier
                 .fillMaxSize()
                 .padding(10.dp),
-//                verticalArrangement = Arrangement.Center,
         ) {
             Image(
-                painter = rememberImagePainter(it?.urls?.small),
+                painter = rememberImagePainter(it.urls?.small),
                 contentDescription = "",
                 modifier = Modifier
                     .height(250.dp)

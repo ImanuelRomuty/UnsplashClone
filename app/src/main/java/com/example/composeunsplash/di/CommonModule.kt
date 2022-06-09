@@ -1,12 +1,12 @@
 package com.example.composeunsplash.di
 
 import androidx.room.Room
+import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.composeunsplash.data.local.ApplicationDatabase
 import com.example.composeunsplash.network.ApiService
 import com.example.composeunsplash.remote.PhotoRemoteDataSource
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -25,11 +25,15 @@ val localModule = module {
 
 val networkModule= module {
     single {
-        val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
         OkHttpClient.Builder()
-            .addInterceptor(ChuckerInterceptor(androidContext()))
+            .addInterceptor(
+                ChuckerInterceptor.Builder(androidContext())
+                    .collector(ChuckerCollector(androidContext()))
+                    .maxContentLength(250000L)
+                    .redactHeaders(emptySet())
+                    .alwaysReadResponseBody(false)
+                    .build()
+            )
             .build()
     }
     single {

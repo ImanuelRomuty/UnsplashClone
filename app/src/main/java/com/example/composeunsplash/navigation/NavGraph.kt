@@ -1,18 +1,18 @@
-package com.example.composeunsplash.template
+package com.example.composeunsplash.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.composeunsplash.DetailScreen
-import com.example.composeunsplash.SearchScreenRemake
-import com.example.composeunsplash.screen.FavoriteScreen
-import com.example.composeunsplash.screen.HomeScreen
+import com.example.composeunsplash.template.detail.DetailScreen
+import com.example.composeunsplash.navigation.bottomBar.BottomBarScreen
+import com.example.composeunsplash.template.favorite.FavoriteScreen
+import com.example.composeunsplash.template.home.HomeScreen
 import com.example.composeunsplash.screen.SearchScreen
 
 
 @Composable
-fun BottomNavGraph(navController: NavHostController) {
+fun NavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = BottomBarScreen.Home.route
@@ -27,6 +27,5 @@ fun BottomNavGraph(navController: NavHostController) {
             DetailScreen(it.arguments?.getString("photoId"))
         }
         composable("search_screen"){ SearchScreen(navController = navController)}
-        composable("search_screen_remake"){ SearchScreenRemake(navController = navController)}
     }
 }

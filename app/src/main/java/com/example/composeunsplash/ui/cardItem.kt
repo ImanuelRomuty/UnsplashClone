@@ -1,5 +1,7 @@
-package com.example.composeunsplash.template
+package com.example.composeunsplash.ui
 
+
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,20 +17,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
-import com.example.composeunsplash.data.local.Photo
+import com.example.composeunsplash.data.api.Result
 
 
 @ExperimentalCoilApi
 @Composable
-fun CardItemFavorite(result: Photo, onClick : (Photo)->Unit) {
+fun CardItem(result: Result, navController: NavHostController) {
     Card(
         elevation = 10.dp,
         shape = RoundedCornerShape(15),
         modifier = Modifier
             .clickable {
-                onClick(result)
+                navController.navigate("DetailScreen/${result.id}")
             }
             .padding(10.dp)
             .fillMaxWidth()
@@ -36,7 +39,7 @@ fun CardItemFavorite(result: Photo, onClick : (Photo)->Unit) {
     )
     {
         Image(
-            painter = rememberImagePainter(data = result.imagePath),
+            painter = rememberImagePainter(data = result.urls?.small),
             contentDescription = "",
             modifier = Modifier
                 .size(300.dp),
@@ -48,7 +51,7 @@ fun CardItemFavorite(result: Photo, onClick : (Photo)->Unit) {
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
-                            Color.Transparent, Color.Black
+                            Color.Transparent,Color.Black
                         ),
                         startY = 300F
                     )
@@ -61,7 +64,7 @@ fun CardItemFavorite(result: Photo, onClick : (Photo)->Unit) {
             contentAlignment = Alignment.BottomStart
         ) {
             Text(
-                text = result.description.toString(),
+                text = result.altDescription.toString(),
                 fontSize = 12.sp,
                 color = Color.White,
                 modifier = Modifier.padding(5.dp)

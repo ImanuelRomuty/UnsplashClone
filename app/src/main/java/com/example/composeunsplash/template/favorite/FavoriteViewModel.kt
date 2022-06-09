@@ -1,11 +1,10 @@
-package com.example.composeunsplash
+package com.example.composeunsplash.template.favorite
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.composeunsplash.data.local.FavoriteRepository
-import com.example.composeunsplash.data.api.Result
 import com.example.composeunsplash.data.local.Photo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

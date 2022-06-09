@@ -1,4 +1,4 @@
-package com.example.composeunsplash
+package com.example.composeunsplash.template
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
@@ -10,8 +10,8 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.composeunsplash.template.BottomNavGraph
-import com.example.composeunsplash.template.BottomBarScreen
+import com.example.composeunsplash.navigation.NavGraph
+import com.example.composeunsplash.navigation.bottomBar.BottomBarScreen
 
 @Composable
 fun MainScreen() {
@@ -19,7 +19,7 @@ fun MainScreen() {
     Scaffold(
         bottomBar = { BottomBar(navController = navController) },
     ) {
-        BottomNavGraph(navController = navController)
+        NavGraph(navController = navController)
     }
 }
 @Composable

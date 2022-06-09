@@ -3,7 +3,7 @@ package com.example.composeunsplash.remote
 import com.example.composeunsplash.data.api.Result
 import com.example.composeunsplash.network.ApiService
 import kotlinx.coroutines.*
-import retrofit2.http.Query
+
 
 class PhotoRemoteDataSource(private val apiService: ApiService) {
     interface MovieCallback {

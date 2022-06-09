@@ -1,4 +1,4 @@
-package com.example.composeunsplash
+package com.example.composeunsplash.template.search
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -8,12 +8,10 @@ import com.example.composeunsplash.remote.PhotoRemoteDataSource
 import com.example.composeunsplash.remote.PhotoRepository
 import com.example.composeunsplash.data.api.Result
 class SearchViewModel(private val repository: PhotoRepository):ViewModel() {
-    //Live Data
     private val photoSplashSearch : MutableLiveData<List<Result>> by lazy {
         MutableLiveData<List<Result>>()
     }
     fun photoSearch(): LiveData<List<Result>> {
-        Log.d("cekSearcha",photoSplashSearch.value.toString())
         return photoSplashSearch
     }
     fun getPhotoSearch(query: String){

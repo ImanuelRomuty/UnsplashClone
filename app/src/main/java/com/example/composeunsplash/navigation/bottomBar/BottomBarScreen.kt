@@ -1,4 +1,4 @@
-package com.example.composeunsplash.template
+package com.example.composeunsplash.navigation.bottomBar
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
