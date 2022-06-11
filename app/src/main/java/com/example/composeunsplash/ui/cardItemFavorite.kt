@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.composeunsplash.data.local.Photo
@@ -22,13 +23,13 @@ import com.example.composeunsplash.data.local.Photo
 
 @ExperimentalCoilApi
 @Composable
-fun CardItemFavorite(result: Photo, onClick : (Photo)->Unit) {
+fun CardItemFavorite(result: Photo, navController: NavHostController) {
     Card(
         elevation = 10.dp,
         shape = RoundedCornerShape(15),
         modifier = Modifier
             .clickable {
-                onClick(result)
+                navController.navigate("DetailScreen/${result.id}")
             }
             .padding(10.dp)
             .fillMaxWidth()

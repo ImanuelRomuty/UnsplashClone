@@ -15,11 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.composeunsplash.ui.CardItemFavorite
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun FavoriteScreen() {
+fun FavoriteScreen(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -27,29 +28,23 @@ fun FavoriteScreen() {
         contentAlignment = Alignment.Center
     ) {
 
-        FetchDataFavorite()
+        FetchDataFavorite(navController)
     }
 }
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun FetchDataFavorite(){
+fun FetchDataFavorite(navController: NavHostController){
     val viewModel = getViewModel<FavoriteViewModel>()
     val results = viewModel.photo().observeAsState()
     results.value?.let {
         LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
             itemsIndexed(items = it){
-                    _, item ->  CardItemFavorite(result = item){
-            }
+                    _, item ->  CardItemFavorite(result = item,navController)
             }
         },
             modifier = Modifier.padding(bottom = 56.dp))
     }
 }
 
-@Composable
-@Preview
-fun ProfileScreenPreview() {
-    FavoriteScreen()
-}

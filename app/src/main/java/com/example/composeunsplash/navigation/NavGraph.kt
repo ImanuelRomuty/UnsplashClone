@@ -21,11 +21,11 @@ fun NavGraph(navController: NavHostController) {
             HomeScreen(navController)
         }
         composable(route = BottomBarScreen.Favorite.route) {
-            FavoriteScreen()
+            FavoriteScreen(navController)
         }
         composable("DetailScreen/{photoId}"){
             DetailScreen(it.arguments?.getString("photoId"))
         }
-        composable("search_screen"){ SearchScreen(navController = navController)}
+//        composable("search_screen"){ SearchScreen(navController = navController)}
     }
 }

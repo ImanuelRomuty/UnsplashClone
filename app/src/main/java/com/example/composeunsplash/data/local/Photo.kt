@@ -9,7 +9,8 @@ import kotlinx.parcelize.Parcelize
 @Entity
 @Parcelize
 data class Photo(
-    @PrimaryKey(autoGenerate = true)    var id : Int? = null,
+    @PrimaryKey(autoGenerate = true)    var idRoom : Int? = null,
+    @ColumnInfo(name = "id")            var id     : String? = null,
     @ColumnInfo(name=  "imagepath")     var imagePath: String? = null,
-    @ColumnInfo(name= "description")    var description : String? = null
+    @ColumnInfo(name= "description")    var description : String? = null,
 ): Parcelable

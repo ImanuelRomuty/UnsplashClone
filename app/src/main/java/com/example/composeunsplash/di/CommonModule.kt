@@ -18,7 +18,7 @@ val localModule = module {
     single {
         Room.databaseBuilder(
             androidContext(),
-            ApplicationDatabase::class.java, "Photo18dd56665s2423.db").fallbackToDestructiveMigration().build()
+            ApplicationDatabase::class.java, "Photo18dd56665s242309.db").fallbackToDestructiveMigration().build()
     }
 }
 

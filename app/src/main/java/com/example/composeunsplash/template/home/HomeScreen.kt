@@ -37,7 +37,6 @@ fun HomeScreen(navController: NavHostController) {
         val text = remember{ mutableStateOf(TextFieldValue(""))}
         Scaffold {
             Column {
-
                 if (SearchBar(textValue = text)){
                     FetchDataSearch(navController)
                 }else{

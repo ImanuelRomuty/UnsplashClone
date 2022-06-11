@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
@@ -24,32 +25,39 @@ import org.koin.androidx.compose.getViewModel
 fun DetailScreen(photoId : String?){
     val viewModel = getViewModel<DetailViewModel>()
     photoId?.let { viewModel.searchPhoto(it) }
+    Log.d("CekFavoriteId",photoId.toString())
     val result = viewModel.detailPhoto().observeAsState()
-    result.value?.let {
-        val photo = Photo(
-            imagePath = it.urls?.small,
-            description = it.altDescription
-        )
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(10.dp),
-        ) {
-            Image(
-                painter = rememberImagePainter(it.urls?.small),
-                contentDescription = "",
-                modifier = Modifier
-                    .height(250.dp)
-                    .fillMaxWidth(),
-                contentScale = ContentScale.Crop,
+    Scaffold() {
+        result.value?.let {
+            val photo = Photo(
+                imagePath = it.urls?.small,
+                description = it.altDescription,
+                id = it.id
             )
-            Text(text = "Location : ")
-            Button(onClick = { viewModel.insertPhoto(photo) }
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(10.dp),
             ) {
-
+                Image(
+                    painter = rememberImagePainter(it.urls?.small),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .height(250.dp)
+                        .fillMaxWidth(),
+                    contentScale = ContentScale.Crop,
+                )
+                Text(text = "Description")
+                Text(text = it.altDescription.toString())
+                Button(
+                    onClick = { viewModel.insertPhoto(photo)}
+                ) {
+                    Text(text = "Favorite")
+                }
             }
         }
     }
+
     }
 
 @Preview
